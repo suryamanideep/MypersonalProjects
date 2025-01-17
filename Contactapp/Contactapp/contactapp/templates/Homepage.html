@@ -1,0 +1,106 @@
+{% extends 'Header.html' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <table border=1 class="table table-hover table-dark table-responsive-md">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Number</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        {% for row in contacts %}
+                            <tbody>
+                            <tr>
+                                <td>{{ row.contact_name }}</td>
+                                <td>{{ row.contact_mail }}</td>
+                                <td>{{ row.number }}</td>
+                                <td>
+                                    <a href="/update/{{ row.id }}" class="btn btn-warning btn-xs" data-toggle="modal"
+                                       data-target="#modaledit{{ row.id }}">Edit</a>
+                                    <a href="/delete/{{ row.number }}" class="btn btn-danger btn-xs"
+                                       onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <!-- Modal Edit Contact-->
+                            <div id="modaledit{{ row.id }}" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Update Information</h4>
+                                            <div class="modal-title">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">X
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/update/{{ row.id }}" method="POST">
+                                                <div class="form-group">
+                                                    <label>Name:</label>
+                                                    <input type="hidden" name="id" value="{{ row.id }}">
+                                                    <input type="text" class="form-control" name="contact_name"
+                                                           value="{{ row.contact_name }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email:</label>
+                                                    <input type="text" class="form-control" name="contact_mail"
+                                                           value="{{ row.contact_mail }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone:</label>
+                                                    <input type="text" class="form-control" name="mobile_number"
+                                                           value="{{ row.number }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary" type="submit">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </table>
+                </div>
+                <!-- Modal Add Contact-->
+                <div id="mymodal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Employee</h4>
+                                <div class="modal-title">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ url_for('insert') }}" method="POST">
+                                    <div class="form-group">
+                                        <label>Name:</label>
+                                        <input type="text" class="form-control" name="contact_name" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email:</label>
+                                        <input type="email" class="form-control" name="contact_mail" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number:</label>
+                                        <input type="text" class="form-control" name="mobile_number" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Add Contact</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

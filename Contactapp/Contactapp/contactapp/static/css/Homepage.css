@@ -1,0 +1,100 @@
+h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    text-align: center;
+}
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: none;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.wrap {
+    display: initial;
+    max-width: 350px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+
+}
+
+.overlay-form {
+    background-color: white;
+    margin-top: 50px;
+    border-radius: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline: none;
+    border: 5px solid black;
+    font-size: 15px;
+    border-radius: 5px;
+
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ffffff;
+}
+
+h2 {
+    text-align: center;
+}
+
+th, td {
+    text-align: left;
+    padding: 15px;
+
+}
+
+input [type="submit"] {
+    font-size: 16px;
+    margin-top: 30px;
+    color: rosybrown;
+    font-weight: bold;
+    background: black;
+    border: 1px solid #C0C0C0;
+    cursor: pointer;
+}
+
+.close {
+    position: initial;
+    top: 20px;
+    right:45px;
+    font-size: 60px;
+    cursor: pointer;
+    color: rgb(95, 255, 95);
+    display: block;
+}
+
+.override {
+    margin-top: 0px;
+    border-radius: 0px;
+}
+.messagepop{
+    vertical-align: top;
+    width: 10%;
+    height: 1%;
+    font-style: italic;
+}
+.add{
+    float: right;
+}
+a:hover, input[type=submit] :hover{
+ background-color: #555555;
+    cursor: pointer;
+}
