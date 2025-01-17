@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <button class="popup-button-generate-grid" id="generateSudokuButton">Sudoku</button>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="left-side">
+            <div id="sudoku-grid">
+                <!-- Creating 81 cells for the 9x9 grid -->
+                {% if puzzle != [] %}
+                    {% for i in range(0, 9) %}
+                        {% for j in range(0, 9) %}
+                        <input class="cell" type="number" min="1" max="9" maxlength="1"
+                        value="{{ puzzle[i][j] if puzzle[i][j] > 0 else '' }}" 
+                        data-row="{{ i }}" data-col="{{ j }}" />
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    {% for i in range(0, 9) %}
+                        {% for j in range(0, 9) %}
+                            <input class="cell" contenteditable="true" data-row="{{ i }}" data-col="{{ j }}" maxlength ="1" type = "number" min = "1" max = "9" id ="single-digit-input" required />
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="center">
+            <div id ="number-inputs-column">
+                <div id="number-inputs">
+                    <!-- Number inputs for 1-9 -->
+                    {% for num in range(1, 10) %}
+                        <div class="number-input"><div class ="number">{{ num }}</div></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-side">
+            <button id="generateSudokuButton">Generate Sudoku</button>
+            <button id="viewSolution">View Solution</button>
+            <button type ="submit" id="validate" action ="/validateSolution" >Validate</button>
+            
+            <!-- Popup for Difficulty Selection -->
+            <div id="popupGenerate" class="popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup('popupGenerate')">&times;</span>
+                    <h2>Choose Difficulty</h2>
+                    <form action = "/send_number" method = "POST">
+                    <button class="send-number" data-number="12" type="submit" name="number" value="12" onclick="closePopup('popupGenerate')">Easy</button>
+                    <button class="send-number" data-number="8" type="submit" name="number" value="8" onclick="closePopup('popupGenerate')">Hard</button>
+                </form>
+                </div>
+            </div>
+            <div id="viewSolutionPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup('viewSolutionPopup')">&times;</span>
+                    <span>Optimal Solution</span>
+                    <div id="sudoku-grid-solution">
+                        {% if solution != [] %}
+                            {% for i in range(0, 9) %}
+                                {% for j in range(0, 9) %}
+                                    <div class="solution-cell"  data-row="{{ i }}" data-col="{{ j }}">
+                                        {{ solution[i][j] if solution[i][j] > 0 else '' }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            {% for i in range(0, 9) %}
+                                {% for j in range(0, 9) %}
+                                    <div class="cell"  data-row="{{ i }}" data-col="{{ j }}"></div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div id ="validateSolutionPopup" class = "popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup('validateSolutionPopup')">&times;</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+</body>
+</html>

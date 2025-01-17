@@ -1,0 +1,31 @@
+/* Overall grid styling */
+#sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    width: 450px;
+    height: 450px;
+    border: 3px solid black;
+    margin: auto;
+}
+
+/* Individual cell styling */
+.cell {
+    border: 1px solid #aaa; /* Default border for all cells */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    font-size: 1.5em; /* Font size for numbers */
+    user-select: none; /* Disable text selection */
+}
+
+/* Make every 3rd column border thicker */
+#sudoku-grid > .cell:nth-child(3n + 1) {
+    border-left: 3px solid black; /* Left border for every 3rd column */
+}
+
+/* Make every 3rd row border thicker, positioned correctly */
+#sudoku-grid > .cell:nth-child(n + 28):nth-child(-n+36),
+#sudoku-grid > .cell:nth-child(n + 55):nth-child(-n+63){
+    border-top: 3px solid black; /* Thick border at the top */
+}

@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #4CAF50;
+    padding: 1rem;
+}
+
+.main-content {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+.left-side {
+    flex: 1; /* Left side takes 1/3 of the space */
+    display: flex;
+    flex-direction: column;
+    padding: 10px; /* Add padding */
+}
+.center{
+
+    padding: 10px;
+    margin-top: 214px;
+}
+
+.right-side {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(9, 50px);
+    width: 450px;
+    height: 450px;
+    border: 3px solid black;
+    margin: auto;
+}
+
+.cell {
+    border: 1px solid #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    user-select: none;
+    text-align: center;
+}
+
+#sudoku-grid > .cell:nth-child(3n + 1) {
+    border-left: 3px solid black;
+}
+
+#sudoku-grid > .cell:nth-child(n + 28):nth-child(-n+36),
+#sudoku-grid > .cell:nth-child(n + 55):nth-child(-n+63) {
+    border-top: 3px solid black;
+}
+#number-inputs-column{
+    align-content: center;
+    height: 450px;
+    margin: 0 10px;
+
+}
+#number-inputs{
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(1, 50px);
+    border: 3px solid black;
+    margin: auto;
+}
+.number-input {
+    background-color: #aaa;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    font-size: 1.5em;
+    user-select: none;
+    margin: 5px;
+}
+.number{
+    text-align: center;
+    margin-top: 5px;
+}
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    position: relative;
+    margin: 10% auto;
+    padding: 50px;
+    width: fit-content;
+    background-color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.send-number {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.send-number[data-number="12"] {
+    background-color: green;
+    color: white;
+}
+
+.send-number[data-number="8"] {
+    background-color: red;
+    color: white;
+}
+
+#viewSolutionPopup .popup-content {
+    width:fit-content;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.solution-cell {
+    border: 1px solid #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    user-select: none;
+    pointer-events: none;
+}
+#sudoku-grid-solution {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    width: 450px;
+    height: 450px;
+    border: 3px solid black;
+    margin: auto;
+}
+
+#sudoku-grid-solution > .solution-cell:nth-child(3n + 1) {
+    border-left: 3px solid black;
+}
+
+#sudoku-grid-solution > .solution-cell:nth-child(n + 28):nth-child(-n+36),
+#sudoku-grid-solution > .solution-cell:nth-child(n + 55):nth-child(-n+63) {
+    border-top: 3px solid black;
+}
